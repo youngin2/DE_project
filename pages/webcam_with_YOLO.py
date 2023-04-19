@@ -9,6 +9,7 @@ import av
 import pandas
 from yolov5.utils.plots import Annotator, colors
 
+# model_path = "yolov5s.pt"
 
 class YOLOv5VideoTransformer(VideoTransformerBase):
     def __init__(self):
