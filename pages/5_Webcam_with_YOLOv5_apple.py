@@ -50,8 +50,8 @@ st.markdown("Click the 'Start' button below to access your webcam and see the ob
 
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
-account_sid = os.environ['ACabccef5060a036a3400aa9008a9ed574']
-auth_token = os.environ['beeec2f782fa9a7ea48feee65fb0e336']
+account_sid = os.environ['AC38d95de65a2321fb544b31ca16739c54']
+auth_token = os.environ['fec0ebb889345992b1e2a2bac2f85338']
 client = Client(account_sid, auth_token)
 
 token = client.tokens.create()
