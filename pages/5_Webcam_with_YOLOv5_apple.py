@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoTransformerBase
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, VideoProcessorBase
 import torch
 from torchvision import transforms
 from PIL import Image
@@ -14,7 +14,7 @@ def load_yolov5_model(model_path):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
     return model
 
-class YOLOv5VideoTransformer(VideoTransformerBase):
+class YOLOv5VideoTransformer(VideoProcessorBase):
     def __init__(self):
         model_path = Path("yolov5s_apple.pt")
         self.model = load_yolov5_model(model_path)
@@ -48,7 +48,7 @@ st.markdown("Click the 'Start' button below to access your webcam and see the ob
 
 webrtc_ctx = webrtc_streamer(key="YOLOv5", 
                             mode=WebRtcMode.SENDRECV,
-                            video_transformer_factory=YOLOv5VideoTransformer,
+                            video_processor_factory=YOLOv5VideoTransformer,
                             media_stream_constraints={"video": True, "audio": False},
                             async_processing=True,
                             )
