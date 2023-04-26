@@ -11,7 +11,7 @@ from yolov5.utils.plots import Annotator, colors
 from pathlib import Path
 import os
 from twilio.rest import Client
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 def load_yolov5_model(model_path):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
@@ -51,6 +51,7 @@ st.markdown("Click the 'Start' button below to access your webcam and see the ob
 
 # Find your Account SID and Auth Token at twilio.com/console
 # and set the environment variables. See http://twil.io/secure
+load_dotenv()
 account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 
