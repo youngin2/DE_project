@@ -52,11 +52,12 @@ st.markdown("Click the 'Start' button below to access your webcam and see the ob
 # and set the environment variables. See http://twil.io/secure
 # account_sid = os.environ['TWILIO_ACCOUNT_SID']
 # auth_token = os.environ['TWILIO_AUTH_TOKEN']
-account_sid = os.environ['ACabccef5060a036a3400aa9008a9ed574']
-auth_token = os.environ['4a979b4888e5a4385eb0c0b688228698']
-client = Client(account_sid, auth_token)
 
-token = client.tokens.create()
+# client = Client(account_sid, auth_token)
+
+# token = client.tokens.create()
+
+
 
 
 webrtc_ctx = webrtc_streamer(key="YOLOv5", 
@@ -65,7 +66,8 @@ webrtc_ctx = webrtc_streamer(key="YOLOv5",
                             media_stream_constraints={"video": True, "audio": False},
                             async_processing=True,
                             rtc_configuration={
-                                "iceServers": token.ice_servers
+                                # "iceServers": token.ice_servers
+                                "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
                             }
                             )
 
