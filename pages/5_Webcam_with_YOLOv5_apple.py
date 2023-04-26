@@ -9,6 +9,8 @@ import av
 import pandas
 from yolov5.utils.plots import Annotator, colors
 from pathlib import Path
+import os
+from twilio.rest import Client
 
 def load_yolov5_model(model_path):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path=model_path)
@@ -46,12 +48,23 @@ class YOLOv5VideoTransformer(VideoProcessorBase):
 st.header("Object Detection with YOLOv5")
 st.markdown("Click the 'Start' button below to access your webcam and see the object detection in real-time.")
 
+# Find your Account SID and Auth Token at twilio.com/console
+# and set the environment variables. See http://twil.io/secure
+account_sid = os.environ['ACabccef5060a036a3400aa9008a9ed574']
+auth_token = os.environ['beeec2f782fa9a7ea48feee65fb0e336']
+client = Client(account_sid, auth_token)
+
+token = client.tokens.create()
+
+
 webrtc_ctx = webrtc_streamer(key="YOLOv5", 
                             mode=WebRtcMode.SENDRECV,
                             video_processor_factory=YOLOv5VideoTransformer,
                             media_stream_constraints={"video": True, "audio": False},
                             async_processing=True,
                             rtc_configuration={
-                                "iceServers": [{"url": ["stun:stun.l.google.com:19302"]}]
+                                "iceServers": token.ice_servers
                             }
                             )
+
+
