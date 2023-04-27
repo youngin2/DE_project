@@ -56,10 +56,8 @@ load_dotenv()
 account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 
-try:
-    client = Client(account_sid, auth_token)
-except twilio.exceptions.TwilioException as e:
-    print(f"An error occurred: {e}")
+client = Client(account_sid, auth_token)
+
 token = client.tokens.create()
 
 webrtc_ctx = webrtc_streamer(key="YOLOv5", 
