@@ -10,6 +10,7 @@ import pandas
 from yolov5.utils.plots import Annotator, colors
 from pathlib import Path
 import os
+import twilio
 from twilio.rest import Client
 from dotenv import load_dotenv
 
